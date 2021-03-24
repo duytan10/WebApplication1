@@ -22,5 +22,10 @@ namespace WebApplication1.Controllers
 
             return c;
         }
+
+        public ActionResult GetView()
+        {
+            return View("MyView");
+        }
     }
 }
