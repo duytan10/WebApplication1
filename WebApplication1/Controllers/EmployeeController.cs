@@ -14,9 +14,9 @@ namespace WebApplication1.Controllers
         public string Address { get; set; }
     }
 
-    public class TestController : Controller
+    public class EmployeeController : Controller
     {
-        public ActionResult GetView()
+        public ActionResult Index()
         {
             EmployeeListViewModel employeeListViewModel = new EmployeeListViewModel();
 
@@ -40,9 +40,29 @@ namespace WebApplication1.Controllers
                 }
                 empViewModels.Add(empViewModel);
             }
+
             employeeListViewModel.Employees = empViewModels;
-            employeeListViewModel.UserName = "Admin";
-            return View("MyView", employeeListViewModel);
+            return View("Index", employeeListViewModel);
+        }
+
+        public ActionResult AddNew()
+        {
+            return View("CreateEmployee");
+        }
+
+        [HttpPost]
+        public ActionResult SaveEmployee(Employee e, string BtnSubmit)
+        {
+            switch (BtnSubmit)
+            {
+                case "Save Employee":
+                    EmployeeBusinessLayer empBal = new EmployeeBusinessLayer();
+                    empBal.SaveEmployee(e);
+                    return RedirectToAction("Index");
+                case "Cancel":
+                    return RedirectToAction("Index");
+            }
+            return new EmptyResult();
         }
     }
 }

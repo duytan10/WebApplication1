@@ -16,6 +16,7 @@ namespace WebApplication1
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Environment.SetEnvironmentVariable("connection", "mongodb+srv://admin:admin@cluster0.cnzt7.mongodb.net/myFirstDatabase?retryWrites=true&w=majority");
         }
     }
 }

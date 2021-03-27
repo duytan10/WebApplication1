@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MongoDB.Driver;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -29,6 +30,15 @@ namespace WebApplication1.Models
             employees.Add(emp);
 
             return employees;
+        }
+
+        private static IMongoCollection<Employee> collection;
+        public Employee SaveEmployee(Employee e)
+        {
+            Mongo mongo = new Mongo();
+            collection = mongo.db.GetCollection<Employee>("Employees");
+            collection.InsertOne(e);
+            return e;
         }
     }
 }
